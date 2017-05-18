@@ -68,6 +68,13 @@ const NUMBER = [
     [1, 1, 1],
     [0, 0, 1],
     [1, 1, 1],
+  ],
+  [
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
+    [0, 1, 0],
+    [0, 0, 0],
   ]
 ];
 
@@ -87,7 +94,7 @@ class NumberBox {
     this.param = Object.assign({}, NUMBER_BOX_PARAM, param);
     this.geometry = new THREE.BoxGeometry(this.param.size, this.param.size, this.param.size);
     this.material = new THREE.MeshPhongMaterial({
-      color: 0x8FCBDC,
+      color: 0x8fb5dc,
       specular: 0xffffff
     });
     this.item = [];
@@ -99,7 +106,7 @@ class NumberBox {
       for(var x = 0; x < 3; x++){
         let index = 1;
         this.item[y][x] = new THREE.Mesh(this.geometry, this.material);
-        this.item[y][x].position.x = x - this.param.size;
+        this.item[y][x].position.x = x * this.param.size - this.param.size;
         this.item[y][x].position.y = (y - this.param.size * 2) * - this.param.size;
         this.item[y][x].scale.x = 1;
         this.item[y][x].scale.y = 1;

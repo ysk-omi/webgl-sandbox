@@ -2,7 +2,7 @@ const CAMERA_PARAMETER = {
   fovy: 60,
   aspect: window.innerWidth / window.innerHeight,
   near: 0.1,
-  far: 200.0,
+  far: 1000.0,
   x: 0.0,
   y: -2.0,
   z: 40.0,
@@ -16,7 +16,6 @@ class CameraController {
     this.init();
   }
   init(){
-    console.log(this.param);
     this.core = new THREE.PerspectiveCamera(
       this.param.fovy,
       this.param.aspect,

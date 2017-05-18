@@ -1,6 +1,7 @@
 import CameraController from './clock/CameraController';
 import SceneController from './clock/SceneController';
-import Clock from './clock/Clock';
+import DegitalClock from './clock/DegitalClock';
+import AnalogClock from './clock/AnalogClock';
 
 const RENDERER_PARAMETER = {
   clearColor: 0xEEEEEE,
@@ -15,7 +16,8 @@ class MainController {
     this.scene = new SceneController();
     this.camera = new CameraController();
     this.renderer = new THREE.WebGLRenderer();
-    this.clock = new Clock();
+    this.degitalClock = new DegitalClock();
+    this.analogClock = new AnalogClock();
     this.update = () => this._update();
     this.isPlay = false;
     this.currentTime = performance.now();
@@ -26,7 +28,8 @@ class MainController {
     this.renderer.setSize(RENDERER_PARAMETER.width, RENDERER_PARAMETER.height);
     this.targetDOM.appendChild(this.renderer.domElement);
     window.scene = this.scene.core;
-    this.scene.add(this.clock.core)
+    this.scene.add(this.degitalClock.core);
+    this.scene.add(this.analogClock.core)
   }
   play(){
     this.update();
@@ -35,8 +38,13 @@ class MainController {
   }
   _update(){
     requestAnimationFrame(this.update);
-    this.clock.setTimeCount(new Date().getHours() + '', new Date().getMinutes() + '', new Date().getSeconds() + '');
-    this.clock.update();
+    let hour = new Date().getHours() + '';
+    let minute = new Date().getMinutes() + '';
+    let second = new Date().getSeconds() + '';
+    this.degitalClock.setTimeCount(hour, minute, second);
+    this.degitalClock.update();
+    this.analogClock.setTimeCount(hour, minute, second);
+    this.analogClock.update();
     this.renderer.render(this.scene.core, this.camera.core);
   }
 }

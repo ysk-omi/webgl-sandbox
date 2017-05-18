@@ -8,16 +8,18 @@ class DegitalClock {
     this._init();
   }
   _init(){
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < 8; i++){
       this.numberBoxs[i] = new NumberBox({
-        position: {x: i * 4 - 12, y: 0, z: 0},
-        size: 1
+        position: {x: i * 4 - 16, y: 0.5*5/2, z: 0},
+        size: 0.5
       });
       this.core.add(this.numberBoxs[i].core);
     }
+    this.numberBoxs[2].setCount(10);
+    this.numberBoxs[5].setCount(10);
   }
   update(){
-    for(let i = 0; i < 6; i++){
+    for(let i = 0; i < 8; i++){
       this.numberBoxs[i].update();
     }
     // this.core.rotation.y += 0.005;
@@ -33,18 +35,18 @@ class DegitalClock {
     this.numberBoxs[1].setCount(hour.slice(-1));
 
     if(minute >= 10){
-      this.numberBoxs[2].setCount(minute.slice(-2,1));
+      this.numberBoxs[3].setCount(minute.slice(-2,1));
     }else{
-      this.numberBoxs[2].setCount(0);
+      this.numberBoxs[3].setCount(0);
     }
-    this.numberBoxs[3].setCount(minute.slice(-1));
+    this.numberBoxs[4].setCount(minute.slice(-1));
 
     if(second >= 10){
-      this.numberBoxs[4].setCount(second.slice(-2,1));
+      this.numberBoxs[6].setCount(second.slice(-2,1));
     }else{
-      this.numberBoxs[4].setCount(0);
+      this.numberBoxs[6].setCount(0);
     }
-    this.numberBoxs[5].setCount(second.slice(-1));
+    this.numberBoxs[7].setCount(second.slice(-1));
   }
 }
 
