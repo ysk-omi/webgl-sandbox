@@ -13,9 +13,9 @@ class MainController {
   constructor(target, param){
     this.targetDOM = document.getElementById(target);
     this.param = Object.assign({}, RENDERER_PARAMETER, param);
+    this.renderer = new THREE.WebGLRenderer();
     this.scene = new SceneController();
     this.camera = new CameraController();
-    this.renderer = new THREE.WebGLRenderer();
     this.degitalClock = new DegitalClock();
     this.analogClock = new AnalogClock();
     this.update = () => this._update();
@@ -28,9 +28,11 @@ class MainController {
     this.renderer.setClearColor(new THREE.Color(RENDERER_PARAMETER.clearColor));
     this.renderer.setSize(RENDERER_PARAMETER.width, RENDERER_PARAMETER.height);
     this.targetDOM.appendChild(this.renderer.domElement);
-    window.scene = this.scene.core;
     this.scene.add(this.degitalClock.core);
-    this.scene.add(this.analogClock.core)
+    this.scene.add(this.analogClock.core);
+
+    //three.js inspector用
+    window.scene = this.scene.core;
   }
   play(){
     this.update();
@@ -39,20 +41,26 @@ class MainController {
   }
   _update(){
     requestAnimationFrame(this.update);
-    let hour = new Date().getHours() + '';
-    let minute = new Date().getMinutes() + '';
-    let second = new Date().getSeconds() + '';
+    //時間の取得
+    let hour = new Date().getHours();
+    let minute = new Date().getMinutes();
+    let second = new Date().getSeconds();
     if(this.currentSecond !== second){
+      //一秒ごとにランダムなカメラアングルを設定する
       this.camera.setTargetAngle(
         (Math.random() * 10 - 5) / (2 * Math.PI), (Math.random() * 10 - 5) / (2 * Math.PI)
       );
       this.currentSecond = second;
     }
+    //時計のアップデート
     this.degitalClock.setTimeCount(hour, minute, second);
     this.degitalClock.update();
     this.analogClock.setTimeCount(hour, minute, second);
     this.analogClock.update();
+    //カメラのアップデート
     this.camera.update();
+
+    //描画
     this.renderer.render(this.scene.core, this.camera.core);
   }
 }

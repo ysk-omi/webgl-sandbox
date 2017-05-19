@@ -1,3 +1,5 @@
+//0〜9と：のときの箱の表示・非表示を配列で置いておく。
+//1が表示・0が非表示
 const NUMBER = [
   [
     [1, 1, 1],
@@ -100,6 +102,7 @@ class NumberBox {
     this.item = [];
     this.init();
   }
+  //3×5の箱を用意
   init(){
     for(var y = 0; y < 5; y++){
       this.item[y] = [];
@@ -117,6 +120,7 @@ class NumberBox {
     }
     this.updatePosition();
   }
+  //箱ごとにスケールを変更して数字を表示する
   update(){
     for(var y = 0; y < 5; y++){
       for(var x = 0; x < 3; x++){
@@ -128,11 +132,13 @@ class NumberBox {
       }
     }
   }
+  //数字のポジション変更
   updatePosition(){
     this.core.position.x = this.param.position.x;
     this.core.position.y = this.param.position.y;
     this.core.position.z = this.param.position.z;
   }
+  //表示する数字の変更
   setCount(count){
     this.count = count;
   }

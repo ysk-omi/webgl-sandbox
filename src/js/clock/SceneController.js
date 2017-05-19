@@ -9,7 +9,6 @@ class SceneController {
     this.core.add(this.ambient);
   }
   add(item){
-    console.log(item);
     this.core.add(item);
   }
   getCore(){
