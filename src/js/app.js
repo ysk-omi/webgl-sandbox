@@ -20,6 +20,7 @@ class MainController {
     this.analogClock = new AnalogClock();
     this.update = () => this._update();
     this.isPlay = false;
+    this.currentSecond = new Date().getSeconds();
     this.currentTime = performance.now();
     this.init();
   }
@@ -41,13 +42,22 @@ class MainController {
     let hour = new Date().getHours() + '';
     let minute = new Date().getMinutes() + '';
     let second = new Date().getSeconds() + '';
+    if(this.currentSecond !== second){
+      this.camera.setTargetAngle(
+        (Math.random() * 10 - 5) / (2 * Math.PI), (Math.random() * 10 - 5) / (2 * Math.PI)
+      );
+      this.currentSecond = second;
+    }
     this.degitalClock.setTimeCount(hour, minute, second);
     this.degitalClock.update();
     this.analogClock.setTimeCount(hour, minute, second);
     this.analogClock.update();
+    this.camera.update();
     this.renderer.render(this.scene.core, this.camera.core);
   }
 }
 
 let mainController = new MainController('webgl');
 mainController.play();
+
+

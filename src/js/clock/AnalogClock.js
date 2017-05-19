@@ -29,6 +29,8 @@ class AnalogClock {
     this.core.add(this.hourHand);
     this.core.add(this.minuteHand);
     this.core.add(this.secondHand);
+
+    this.core.position.z = -2;
   }
   update(){
 
