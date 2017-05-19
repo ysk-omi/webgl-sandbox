@@ -52,11 +52,13 @@ class MainController {
       );
       this.currentSecond = second;
     }
-    //時計のアップデート
+    //デジタル時計のアップデート
     this.degitalClock.setTimeCount(hour, minute, second);
     this.degitalClock.update();
+
+    //アナログ時計の針を進める
     this.analogClock.setTimeCount(hour, minute, second);
-    this.analogClock.update();
+
     //カメラのアップデート
     this.camera.update();
 

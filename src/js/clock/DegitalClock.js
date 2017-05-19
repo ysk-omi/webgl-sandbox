@@ -33,27 +33,27 @@ class DegitalClock {
 
     //時間
     if(hour >= 10){
-      this.numberBoxs[0].setCount(hour.slice(-2,1));
+      this.numberBoxs[0].setCount(_hour.slice(-2,1));
     }else{
       this.numberBoxs[0].setCount(0);
     }
-    this.numberBoxs[1].setCount(hour.slice(-1));
+    this.numberBoxs[1].setCount(_hour.slice(-1));
 
     //分
     if(minute >= 10){
-      this.numberBoxs[3].setCount(minute.slice(-2,1));
+      this.numberBoxs[3].setCount(_minute.slice(-2,1));
     }else{
       this.numberBoxs[3].setCount(0);
     }
-    this.numberBoxs[4].setCount(minute.slice(-1));
+    this.numberBoxs[4].setCount(_minute.slice(-1));
 
     //秒
     if(second >= 10){
-      this.numberBoxs[6].setCount(second.slice(-2,1));
+      this.numberBoxs[6].setCount(_second.slice(-2,1));
     }else{
       this.numberBoxs[6].setCount(0);
     }
-    this.numberBoxs[7].setCount(second.slice(-1));
+    this.numberBoxs[7].setCount(_second.slice(-1));
   }
 }
 
